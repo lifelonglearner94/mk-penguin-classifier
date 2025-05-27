@@ -12,7 +12,7 @@ if __name__ == "__main__":
         logger.info(f"Preprocessing pipeline completed. Run ID: {preprocessing_run_id}")
 
         logger.info("Executing model training pipeline...")
-        run_training_pipeline(preprocessing_run_id=preprocessing_run_id)
+        run_training_pipeline()
         logger.info("Model training pipeline completed successfully")
 
     except Exception as e:

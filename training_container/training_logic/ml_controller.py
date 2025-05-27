@@ -162,7 +162,9 @@ def run_preprocessing_pipeline():
         preprocessed_data = combined_data
 
     # Get the S3 URI for the saved database
-    database_s3_uri = data_manager.get_last_saved_s3_uri()
+    # Construct S3 URI manually since we know where the data was saved
+    db_filename = Path(LOCAL_PROCESSED_DB_PATH).name
+    database_s3_uri = f"s3://{DATA_LAKE_BUCKET}/processed_data/{db_filename}"
     logger.info(f"Preprocessing pipeline completed. Database S3 URI: {database_s3_uri}")
 
     return preprocessed_data, database_s3_uri
