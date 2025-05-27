@@ -1,0 +1,44 @@
+[project]
+name = "training-container"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Marcel Knauf",email = "marcel.kn1994@hotmail.de"}
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy (>=2.2.6,<3.0.0)",
+    "pandas (>=2.2.3,<3.0.0)",
+    "scikit-learn (>=1.6.1,<2.0.0)",
+    "mlflow (>=2.22.0,<3.0.0)",
+    "palmerpenguins (>=0.1.4,<0.2.0)",
+    "setuptools (>=80.8.0,<81.0.0)",
+    "python-dotenv (>=0.21.0,<1.0.0)", # Corrected from dotenv to python-dotenv and version
+    "boto3 (>=1.28.0,<2.0.0)", # Added boto3
+    "pytest (>=8.3.5,<9.0.0)"
+]
+
+[tool.poetry]
+name = "training-logic"
+version = "0.1.0"
+description = "Logik für das Pinguin-Modelltraining"
+authors = ["Marcel Knauf <marcel.kn1994@hotmail.de>"]
+packages = [{include = "training_logic"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+scikit-learn = ">=1.6.1,<2.0.0"  # Aligned with [project]
+pandas = ">=2.2.3,<3.0.0"      # Aligned with [project]
+mlflow = ">=2.22.0,<3.0.0"     # Aligned with [project]
+python-dotenv = ">=0.21.0,<1.0.0" # Aligned with [project]
+sqlalchemy = "^2.0.29"
+psycopg2-binary = "^2.9.9"
+boto3 = ">=1.28.0,<2.0.0"       # Aligned with [project]
+numpy = ">=2.2.6,<3.0.0"       # Added from [project]
+palmerpenguins = ">=0.1.4,<0.2.0" # Added from [project]
+setuptools = ">=80.8.0,<81.0.0" # Added from [project]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

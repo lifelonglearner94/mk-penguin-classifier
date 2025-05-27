@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+
+# Virtual Environment
+.env
+.venv/
+venv/
+
+# Testing
+.pytest_cache/
+.coverage
+
+# MLflow
+mlruns/
+mlflow_tracking_data/
+
+# Data & Logs
+data/raw_db/*.db
+data/preprocessed_db/*.db
+*.log
+logs/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

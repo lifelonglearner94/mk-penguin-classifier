@@ -1,0 +1,140 @@
+/* assets/custom.css */
+
+/* --- Google Fonts Import --- */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap');
+
+/* --- Globale Styles & Farbschema --- */
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f8f9fa;
+    color: #343a40;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+h1.text-primary {
+    color: #17a2b8 !important;
+}
+
+/* --- Primärfarben Anpassung --- */
+.btn-primary {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    color: white;
+    font-weight: 600;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.btn-primary:hover {
+    background-color: #138496;
+    border-color: #117a8b;
+}
+
+/* --- Card Styling --- */
+.card {
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.card-header {
+    background-color: #eef1f2;
+    border-bottom: 1px solid #dee2e6;
+    padding: 10px 15px;
+}
+
+.card-header h4 {
+    margin-bottom: 0;
+    font-size: 18px;
+    color: #495057;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* --- Formular-Elemente (Inputs) --- */
+.form-label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #495057;
+}
+
+.form-control,
+.form-select {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    padding: 8px 12px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #17a2b8;
+}
+
+/* --- Ergebnis-Bereich ANPASSUNGEN --- */
+#output-classification {
+    width: 100%;
+    text-align: center;
+}
+
+#output-classification img {
+    max-width: 100%;
+    height: 180px;
+    margin-bottom: 10px;
+}
+
+#output-classification h5 {
+    color: #28a745;
+    font-size: 1.1rem;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#output-classification p {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+
+#output-classification p.small.text-muted {
+    font-size: 0.85rem;
+    margin-top: 5px;
+}
+
+/* --- Ladeanzeige (dcc.Loading) --- */
+#loading-spinner {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* --- Footer --- */
+footer .text-muted {
+    font-size: 0.85rem;
+    padding-top: 30px;
+    padding-bottom: 15px;
+    border-top: 1px solid #e9ecef;
+    margin-top: 30px;
+    text-align: center;
+}
+
+/* --- Responsivität --- */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+    .card-body {
+        padding: 15px;
+    }
+    #output-classification img {
+        height: 150px;
+    }
+}

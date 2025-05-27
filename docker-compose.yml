@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+
+  minio:
+    image: minio/minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      - MINIO_ROOT_USER=max.mustermann
+      - MINIO_ROOT_PASSWORD=musterpasswort
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio_data:/data
+
+  mlflow:
+    image: penguin_mlflow_server
+    build:
+      context: ./mlflow
+    ports:
+      - "5000:5000"
+    environment:
+      - MLFLOW_S3_ENDPOINT_URL=http://minio:9000
+      - AWS_ACCESS_KEY_ID=max.mustermann
+      - AWS_SECRET_ACCESS_KEY=musterpasswort
+    command: mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri sqlite:////mlflow_backend_db/mlflow.db --default-artifact-root s3://mlflow-artifacts/
+    volumes:
+      - mlflow_server_db_data:/mlflow_backend_db
+    depends_on:
+      - minio
+
+  training:
+    build:
+      context: ./training_container
+    command: ["python", "run_training.py"]
+    environment:
+      - MLFLOW_TRACKING_URI=http://mlflow:5000
+      - AWS_ACCESS_KEY_ID=max.mustermann
+      - AWS_SECRET_ACCESS_KEY=musterpasswort
+      - MLFLOW_S3_ENDPOINT_URL=http://minio:9000
+      - DATA_MODE=overwrite # or 'append' based on your needs
+      - RAW_DATA_SOURCE=palmerpenguins
+    depends_on:
+      - mlflow
+      - minio
+
+  ui_inference:
+    build:
+      context: ./ui_inference_container
+    ports:
+      - "8050:8050"  # UI port
+      - "8080:8080"  # API port
+    environment:
+      - MLFLOW_TRACKING_URI=http://mlflow:5000
+      - AWS_ACCESS_KEY_ID=max.mustermann
+      - AWS_SECRET_ACCESS_KEY=musterpasswort
+      - MLFLOW_S3_ENDPOINT_URL=http://minio:9000
+      - API_KEY=Your_API_Key
+      - API_BASE_URL=http://localhost:8080
+    depends_on:
+      mlflow:
+        condition: service_started
+      minio:
+        condition: service_started
+      training:
+        condition: service_completed_successfully
+
+volumes:
+  minio_data:
+  mlflow_server_db_data:
